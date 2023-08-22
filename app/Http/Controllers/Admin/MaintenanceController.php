@@ -74,7 +74,7 @@ class MaintenanceController extends Controller
             $maintenance->proceso = $request->input('proceso');
             $maintenance->descripcion = $request->input('descripcion');
             if ($request->input('estado') != '') {
-                $maintenance->estado = $request->input('estado');
+                $maintenance->estado = 'Activo';
             }
             $maintenance->nivel_criticidad = $request->input('nivel_criticidad');
             $maintenance->ejecutor = $request->input('ejecutor');
