@@ -21,7 +21,7 @@ class CreateMaintenanceTable extends Migration
             $table->text('maquina')->nullable();
             $table->text('proceso')->nullable();
             $table->text('descripcion')->nullable();
-            $table->text('estado')->default('Activo')->nullable();
+            $table->string('estado')->default('Activo')->nullable();
             $table->text('ejecutor')->nullable();
             $table->text('nivel_criticidad')->nullable();
             $table->text('estado_previo')->nullable();
