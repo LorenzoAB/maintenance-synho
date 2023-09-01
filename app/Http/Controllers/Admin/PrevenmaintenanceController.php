@@ -166,7 +166,6 @@ class PrevenmaintenanceController extends Controller
                     ->withErrors($validator)
                     ->withInput();
             }
-
             $prevenmaintenance = Prevenmaintenance::findOrFail($id);
             $prevenmaintenance->parametro = $request->input('parametro');
             $prevenmaintenance->factibilidad_revision = $request->input('factibilidad_revision');
