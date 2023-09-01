@@ -337,8 +337,8 @@ return [
         ],
     
         [
-            'text'    => 'Mantenimiento',
-            'icon'    => 'fas fa-network-wired',
+            'text'    => 'Alerta Mantenimiento',
+            'icon'    => 'fa fa-window-close',
             'submenu' => [
                 [
                     'text' => 'Nuevo Registro',
@@ -347,6 +347,22 @@ return [
                 [
                     'text' => 'Lista de Registro',
                     'url'  => '/home/maintenance',
+                ],
+
+            ],
+        ],
+
+        [
+            'text'    => 'Mantenimiento Preven',
+            'icon'    => 'fas fa-network-wired',
+            'submenu' => [
+                [
+                    'text' => 'Nuevo Registro',
+                    'url'  => '/admin/prevenmaintenance/create',
+                ],
+                [
+                    'text' => 'Lista de Registro',
+                    'url'  => '/admin/prevenmaintenance',
                 ],
 
             ],

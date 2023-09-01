@@ -86,8 +86,8 @@
                                         <label for="role_as">Estado</label>
                                         <select class="form-control" name="role_as">
                                             <option selected>Selecciona Estado</option>
-                                            <option value="1">Administrador</option>
-                                            <option value="0">Supervisor</option>
+                                            <option value="1">Admin</option>
+                                            <option value="0">User</option>
                                         </select>
                                         @error('role_as')
                                             <small class="text-danger">{{ $message }}</small>

@@ -1,20 +1,21 @@
 @extends('adminlte::page')
 
-@section('title', 'SYNHO | Lista Mantenimiento')
+@section('title', 'SYNHO | Lista Mantenimiento Preventivo')
 
 @section('content_header')
 @stop
 
-@section('content')<div class="content-header">
+@section('content')
+    <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Mantenimiento</h1>
+                    <h1 class="m-0 text-dark">Mantenimiento Preventivo</h1>
                 </div>
 
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a>Mantenimiento</a></li>
+                        <li class="breadcrumb-item"><a>Mantenimiento Preven</a></li>
                         <li class="breadcrumb-item active">Lista de Registro</li>
                     </ol>
                 </div>
@@ -30,7 +31,7 @@
             <!-- /.card -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Lista de Mantenimiento</h3>
+                    <h3 class="card-title">Lista de Mantenimiento Preventivo</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
@@ -54,7 +55,7 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                             <h3>
-                                <a href="{{ url('home/maintenance/create') }}" class="btn btn-primary"><i
+                                <a href="{{ url('admin/prevenmaintenance/create') }}" class="btn btn-primary"><i
                                         class="fas fa-plus"></i>
                                     Nuevo Registro</a>
                             </h3>
@@ -105,12 +106,12 @@
     <script src="{{ asset('js/functions.js') }}"></script>
     <script>
         $(document).ready(function() {
-            list_ajax_maintenance();
+            list_ajax_prevenmaintenance();
         }); //FIN DE AJAX
 
-        function list_ajax_maintenance() {
+        function list_ajax_prevenmaintenance() {
             $.ajax({
-                url: "{{ route('list_ajax_maintenance') }}",
+                url: "{{ route('list_ajax_prevenmaintenance') }}",
                 method: "GET",
                 dataType: "json",
                 headers: {
@@ -128,69 +129,71 @@
                             "language": {
                                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
                             },
+                            order: [
+                                [1, 'desc']
+                            ]
                         });
 
                         table.clear();
                         var numero = 0;
+                        var pdf = '';
                         var show = '';
                         var edit = '';
                         var delet = '';
-                        
+
+
                         $.each(data.data, function(i, item) {
 
                             if (data.data[i].estado.includes('Activo')) {
                                 estado = '<span class="badge badge-info">ACTIVO</span>';
-                            } else if (data.data[i].estado.includes('Recibido')) {
-                                estado = '<span class="badge badge-primary">RECIBIDO</span>';
                             } else if (data.data[i].estado.includes('En Proceso')) {
                                 estado = '<span class="badge badge-warning">EN PROCESO</span>';
                             } else if (data.data[i].estado.includes('Solucionado')) {
                                 estado = '<span class="badge badge-success">SOLUCIONADO</span>';
-                            }else {
+                            } else {
                                 estado = '<span class="badge badge-danger">ANULADO</span>';
                             }
 
+                            pdf = '<a href="{{ url('/admin/prevenmaintenance') }}/' + data
+                                        .data[i]
+                                        .id +
+                                        '/report' +
+                                        '" class="btn btn-primary"><i class="fas fa-file-pdf"></i></a>'
                             if (data.data[i].estado.includes('Anulado')) {
-                                show = '<a href="{{ url('/home/maintenance') }}/' + data.data[i].id +
-                                '/show' +
-                                '" class="btn btn-success"><i class="fas fa-eye"></i></a>'
+                                show = ' <a href="{{ url('/admin/prevenmaintenance') }}/' + data.data[i]
+                                    .id +
+                                    '/show' +
+                                    '" class="btn btn-success"><i class="fas fa-eye"></i></a>'
                                 edit = ''
                                 delet = ''
-                            }else {
-
-                                if({{ Auth::check() }} == true &&  {{ Auth::user()->role_as }} == '0'){
-                                    show = '<a href="{{ url('/home/maintenance') }}/' + data.data[i].id +
-                                    '/show' + '" class="btn btn-success"><i class="fas fa-eye"></i></a>'
-
-                                    if ({{ Auth::check() }} == true &&  {{ Auth::user()->id }} == data.data[i].user_id && data.data[i].estado.includes('Activo') ) {
-                                        edit = ' <a href="{{ url('/home/maintenance') }}/' + data.data[i].id +
-                                        '/edit' + '" class="btn btn-warning"><i class="fas fa-edit"></i></a>'
-                                    } else {
-                                        edit = ''
-                                    }
-                                    
-                                    if ({{ Auth::check() }} == true && {{ Auth::user()->id }} == data.data[i].user_id && data.data[i].estado.includes('Activo')) {
-                                        delet = ' <a onclick="delete_record(' + data.data[i].id + ')" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>'
-                                    } else {
-                                        delet = ''
-                                    }
-                                }else{
-                                    show = '<a href="{{ url('/home/maintenance') }}/' + data.data[i].id +
-                                    '/show' + '" class="btn btn-success"><i class="fas fa-eye"></i></a>'
-                                    edit = ' <a href="{{ url('/home/maintenance') }}/' + data.data[i].id +
-                                        '/edit' + '" class="btn btn-warning"><i class="fas fa-edit"></i></a>'
-                                    delet = ' <a onclick="delete_record(' + data.data[i].id + ')" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>'
+                            } else {
+                                if ({{ Auth::check() }} == true && {{ Auth::user()->role_as }} == '0') {
+                                    show = ' <a href="{{ url('/admin/prevenmaintenance') }}/' + data
+                                        .data[i].id +
+                                        '/show' +
+                                        '" class="btn btn-success"><i class="fas fa-eye"></i></a>'
+                                } else {
+                                    show = ' <a href="{{ url('/admin/prevenmaintenance') }}/' + data
+                                        .data[i].id +
+                                        '/show' +
+                                        '" class="btn btn-success"><i class="fas fa-eye"></i></a>'
+                                    edit = ' <a href="{{ url('/admin/prevenmaintenance') }}/' + data
+                                        .data[i].id +
+                                        '/edit' +
+                                        '" class="btn btn-warning"><i class="fas fa-edit"></i></a>'
+                                    delet = ' <a onclick="delete_record(' + data.data[i].id +
+                                        ')" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>'
                                 }
                             }
 
                             numero = numero + 1
 
                             table.row.add([
-                                data.data[i].id,
+                                numero,
                                 data.data[i].user,
                                 data.data[i].created_at,
                                 estado,
-                                show + edit + delet
+                                pdf + show + edit + delet
                             ]);
                         });
                         table.draw();
@@ -228,7 +231,7 @@
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        url: "{{ route('destroy_maintenance') }}",
+                        url: "{{ route('destroy_prevenmaintenance') }}",
                         method: 'POST',
                         data: {
                             id: id
@@ -249,7 +252,7 @@
                                     text: data.message,
                                     timer: 2000
                                 });
-                                list_ajax_maintenance();
+                                list_ajax_prevenmaintenance();
                             }
                         },
                         error: function(data) {

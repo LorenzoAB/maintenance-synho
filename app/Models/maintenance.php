@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class maintenance extends Model
+class Maintenance extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,8 @@ class maintenance extends Model
 
     protected $fillable = [
         'user_id',
-        'fecha_inicio',
+        'fecha_recibido',
+        'fecha_proceso',
         'fecha_final',
         'maquina',
         'proceso',

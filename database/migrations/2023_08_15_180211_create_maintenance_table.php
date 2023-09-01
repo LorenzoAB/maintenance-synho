@@ -16,7 +16,8 @@ class CreateMaintenanceTable extends Migration
         Schema::create('maintenance', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
-            $table->dateTime('fecha_inicio')->nullable();
+            $table->dateTime('fecha_recibido')->nullable();
+            $table->dateTime('fecha_proceso')->nullable();
             $table->dateTime('fecha_final')->nullable();
             $table->text('maquina')->nullable();
             $table->text('proceso')->nullable();

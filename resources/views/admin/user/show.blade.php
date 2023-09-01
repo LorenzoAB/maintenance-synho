@@ -74,10 +74,10 @@
                                     <div class="form-group col-md-6">
                                         <label for="role_as">Estado</label>
                                         @if ($user->role_as == '1')
-                                            <input type="text" name="role_as" class="form-control" value="Administrador"
+                                            <input type="text" name="role_as" class="form-control" value="Admin"
                                                 disabled placeholder="Role...">
                                         @else
-                                            <input type="text" name="role_as" class="form-control" value="Supervisor"
+                                            <input type="text" name="role_as" class="form-control" value="User"
                                                 disabled placeholder="Role...">
                                         @endif
                                     </div>

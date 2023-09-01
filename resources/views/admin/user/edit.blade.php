@@ -88,11 +88,11 @@
                                         <select class="form-control" name="role_as">
                                             <option selected>Selecciona Estado</option>
                                             @if ($user->role_as == '1')
-                                                <option value="1" selected>Administrador</option>
-                                                <option value="0">Supervisor</option>
+                                                <option value="1" selected>Admin</option>
+                                                <option value="0">User</option>
                                             @else
-                                                <option value="1">Administrador</option>
-                                                <option value="0" selected>Supervisor</option>
+                                                <option value="1">Admin</option>
+                                                <option value="0" selected>User</option>
                                             @endif
                                         </select>
                                         @error('role_as')

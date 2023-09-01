@@ -59,19 +59,37 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="fecha_inicio">Fecha y Hora (inicio)</label>
-                                    <input type="datetime-local" name="fecha_inicio" class="form-control"
-                                        value="{{ $maintenance->fecha_inicio }}" disabled placeholder="Fecha inicio...">
-                                    @error('fecha_inicio')
+                                <div class="form-group col-md-3">
+                                    <label for="created_at">Fecha y Hora (Creado)</label>
+                                    <input type="datetime-local" name="created_at" class="form-control"
+                                        value="{{ $maintenance->created_at }}" readonly placeholder="Fecha inicio...">
+                                    @error('created_at')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 
-                                <div class="form-group col-md-6">
-                                    <label for="fecha_final">Fecha y Hora (fin)</label>
+                                <div class="form-group col-md-3">
+                                    <label for="fecha_recibido">Fecha y Hora (Recibido)</label>
+                                    <input type="datetime-local" name="fecha_recibido" class="form-control"
+                                        value="{{ $maintenance->fecha_recibido }}" readonly placeholder="Fecha inicio...">
+                                    @error('fecha_recibido')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="fecha_proceso">Fecha y Hora (Proceso)</label>
+                                    <input type="datetime-local" name="fecha_proceso" class="form-control"
+                                        value="{{ $maintenance->fecha_proceso }}" readonly placeholder="Fecha final..." {{ Auth::user()->role_as == '1' ? '' : 'disabled' }}>
+                                    @error('fecha_proceso')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="fecha_final">Fecha y Hora (Final)</label>
                                     <input type="datetime-local" name="fecha_final" class="form-control"
-                                        value="{{ $maintenance->fecha_final }}" placeholder="Fecha final..." {{ Auth::user()->role_as == '1' ? '' : 'disabled' }}>
+                                        value="{{ $maintenance->fecha_final }}" readonly placeholder="Fecha final..." {{ Auth::user()->role_as == '1' ? '' : 'disabled' }}>
                                     @error('fecha_final')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror

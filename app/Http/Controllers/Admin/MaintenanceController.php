@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
-use App\Models\maintenance;
+use App\Models\Maintenance;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MaintenancealertMail;
 use Carbon\Carbon;
@@ -25,7 +25,7 @@ class MaintenanceController extends Controller
     {
         $data = DB::table('maintenance as m')
             ->join('users as u', 'm.user_id', '=', 'u.id')
-            ->select('m.id', 'm.user_id', 'u.name as user', 'm.fecha_inicio', 'm.estado')
+            ->select('m.id', 'm.user_id', 'u.name as user', 'm.created_at', 'm.estado')
             ->orderBy('id', 'desc')->get();
 
         if ($data) {
@@ -66,9 +66,10 @@ class MaintenanceController extends Controller
 
         try {
             // Guardar el registro
-            $maintenance = new maintenance();
+            $maintenance = new Maintenance();
             $maintenance->user_id = $user->id;
-            $maintenance->fecha_inicio = now();
+            $maintenance->fecha_recibido = $request->input('fecha_recibido');
+            $maintenance->fecha_proceso = $request->input('fecha_proceso');
             $maintenance->fecha_final = $request->input('fecha_final');
             $maintenance->maquina = $request->input('maquina');
             $maintenance->proceso = $request->input('proceso');
@@ -77,6 +78,18 @@ class MaintenanceController extends Controller
                 $maintenance->estado = 'Activo';
             } else {
                 $maintenance->estado = $request->input('estado');
+            }
+            // Validar Fechas por estados
+            if($request->input('estado') == 'Recibido' && is_null($maintenance->fecha_recibido)){
+                $maintenance->fecha_recibido = now();
+            }
+
+            if($request->input('estado') == 'En Proceso' && is_null($maintenance->fecha_proceso)){
+                $maintenance->fecha_proceso = now();
+            }
+
+            if($request->input('estado') == 'Solucionado' && is_null($maintenance->fecha_final)){
+                $maintenance->fecha_final = now();
             }
             $maintenance->nivel_criticidad = $request->input('nivel_criticidad');
             $maintenance->ejecutor = $request->input('ejecutor');
@@ -111,7 +124,7 @@ class MaintenanceController extends Controller
             $phoneId = '120058534419147';
             $version = 'v17.0';
         
-            $phones = ['51946569795', '51975390060'];
+            $phones = ['51993359628', '51975390060'];
         
             foreach ($phones as $phone) {
                 $payload = [
@@ -240,7 +253,20 @@ class MaintenanceController extends Controller
 
             $maintenance = Maintenance::find($id);
 
-            $maintenance->fecha_final = $request->input('fecha_final');
+            // Validar Fechas por estados
+            if($request->input('estado') == 'Recibido' && is_null($maintenance->fecha_recibido)){
+                $maintenance->fecha_recibido = now();
+            }
+
+            if($request->input('estado') == 'En Proceso' && is_null($maintenance->fecha_proceso)){
+                $maintenance->fecha_proceso = now();
+            }
+
+            if($request->input('estado') == 'Solucionado' && is_null($maintenance->fecha_final)){
+                $maintenance->fecha_final = now();
+            }
+
+
             $maintenance->estado = $request->input('estado');
             $maintenance->nivel_criticidad = $request->input('nivel_criticidad');
             $maintenance->ejecutor = $request->input('ejecutor');
@@ -275,7 +301,7 @@ class MaintenanceController extends Controller
 
         if ($maintenance) {
             $array = array(
-                'message' => 'Eliminado Correctamente',
+                'message' => 'Anulado Correctamente',
                 'code' => 200,
                 'error' => false,
             );

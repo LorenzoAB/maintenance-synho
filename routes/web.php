@@ -41,7 +41,6 @@ Route::prefix('home')->middleware(['auth'])->group(function () {
         Route::post('/maintenance/delete', 'destroy')->name('destroy_maintenance');
         Route::put('/maintenance/{maintenance}', 'update');
         Route::get('/maintenance/list_ajax_maintenance', 'list_ajax')->name('list_ajax_maintenance');
-        Route::get('/maintenance/whatsapp', 'sendWhatsAppMessage');
     });
 
 });
@@ -62,5 +61,23 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('/user/delete', 'destroy')->name('destroy_user');
         Route::put('/user/{user}', 'update');
         Route::get('/user/list_ajax_user', 'list_ajax')->name('list_ajax_user');
+    });
+
+    # Preven Mantenimiento
+    Route::controller(App\Http\Controllers\Admin\PrevenmaintenanceController::class)->group(function () {
+        Route::get('/prevenmaintenance', 'index')->name('list_prevenmaintenance');
+        Route::get('/prevenmaintenance/create', 'create');
+        Route::post('/prevenmaintenance', 'store');
+        Route::get('/prevenmaintenance/{prevenmaintenance}/show', 'show');
+        Route::get('/prevenmaintenance/{prevenmaintenance}/edit', 'edit');
+        Route::get('/prevenmaintenance/{prevenmaintenance}/report', 'report');
+        Route::post('/prevenmaintenance/delete', 'destroy')->name('destroy_prevenmaintenance'); 
+        Route::put('/prevenmaintenance/{prevenmaintenance}', 'update');
+        Route::get('/prevenmaintenance/list_ajax_prevenmaintenance', 'list_ajax_prevenmaintenance')->name('list_ajax_prevenmaintenance');
+        
+        //Detal
+        Route::post('/prevenmaintenance/createdetail', 'create_detail'); 
+        Route::get('/prevenmaintenance/{id_detail}/delete', 'destroy_detail'); 
+        Route::post('/prevenmaintenance/{id_detail}/update', 'update_detail'); 
     });
 });
