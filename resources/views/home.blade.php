@@ -15,7 +15,8 @@
                 <!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a>Home</a></li>
+                        <li class="breadcrumb-item"><a>Dashboard</a></li>
+                        <li class="breadcrumb-item active">Home</li>
                     </ol>
                 </div>
                 <!-- /.col -->
@@ -31,9 +32,7 @@
             <!-- /.card -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Iot</h3>
-                    <br>
-                    <p class="card-title">Hola! Bienvenido a la web de synho!, Pruebas nuestro aplicaciones!!!.</p>
+                    <h3 class="card-title">Hola! Bienvenido a la web de Alertas synho!, Genera tus Alertas!!!.</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                             title="Collapse">
@@ -54,6 +53,96 @@
                             </button>
                         </div>
                     @endif
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card card-body bg-primary text-white mb-3">
+                                <label>Total Mantenimiento Alerta</label>
+                                <h1>{{ $totalMaintenance }}</h1>
+                                <a href="{{ url('home/maintenance') }}" class="text-white">View</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-body bg-success text-white mb-3">
+                                <label>Hoy Mantenimiento Alerta</label>
+                                <h1>{{ $todayMaintenance }}</h1>
+                                <a href="{{ url('home/maintenance') }}" class="text-white">View</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-body bg-warning text-white mb-3">
+                                <label>Mes Mantenimiento Alerta</label>
+                                <h1>{{ $thisMonthMaintenance }}</h1>
+                                <a href="{{ url('home/maintenance') }}" class="text-white">View</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-body bg-danger text-white mb-3">
+                                <label>Year Mantenimiento Alerta</label>
+                                <h1>{{ $thisYearMaintenance }}</h1>
+                                <a href="{{ url('home/maintenance') }}" class="text-white">View</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card card-body bg-primary text-white mb-3">
+                                <label>Total de Mantenimiento Preven</label>
+                                <h1>{{ $totalPrevenmaintenance }}</h1>
+                                <a href="{{ url('admin/prevenmaintenance') }}" class="text-white">View</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-body bg-success text-white mb-3">
+                                <label>Hoy Mantenimiento Preven</label>
+                                <h1>{{ $todayPrevenmaintenance }}</h1>
+                                <a href="{{ url('admin/prevenmaintenance') }}" class="text-white">View</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-body bg-warning text-white mb-3">
+                                <label>Mes Mantenimiento Preven</label>
+                                <h1>{{ $thisMonthPrevenmaintenance }}</h1>
+                                <a href="{{ url('admin/prevenmaintenance') }}" class="text-white">View</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-body bg-danger text-white mb-3">
+                                <label>Year Mantenimiento Preven</label>
+                                <h1>{{ $thisYearPrevenmaintenance }}</h1>
+                                <a href="{{ url('admin/prevenmaintenance') }}" class="text-white">View</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card card-body bg-primary text-white mb-3">
+                                <label>Todos los usuarios</label>
+                                <h1>{{ $totalAllUsers }}</h1>
+                                <a href="{{ url('admin/user') }}" class="text-white">View</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-body bg-success text-white mb-3">
+                                <label>Total de usuarios</label>
+                                <h1>{{ $totalUser }}</h1>
+                                <a href="{{ url('admin/user') }}" class="text-white">View</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-body bg-warning text-white mb-3">
+                                <label>Total de Admins</label>
+                                <h1>{{ $totalAdmin }}</h1>
+                                <a href="{{ url('admin/user') }}" class="text-white">View</a>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <!-- /.card-body -->

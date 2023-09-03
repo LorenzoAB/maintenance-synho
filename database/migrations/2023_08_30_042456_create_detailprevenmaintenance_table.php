@@ -24,7 +24,7 @@ class CreateDetailprevenmaintenanceTable extends Migration
             $table->foreign('prevenmaintenance_id')->references('id')->on('prevenmaintenance')->onDelete('cascade');
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *
