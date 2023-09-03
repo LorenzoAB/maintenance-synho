@@ -224,29 +224,19 @@
                                         <select class="form-control" name="estado">
                                             @if ($prevenmaintenance->estado == 'Activo')
                                                 <option value="Activo" selected>Activo</option>
-                                                <option value="Recibido">Recibido</option>
-                                                <option value="En Proceso">En Proceso</option>
-                                                <option value="Solucionado">Solucionado</option>
-                                            @elseif ($prevenmaintenance->estado == 'Recibido')
-                                                <option value="Activo">Activo</option>
-                                                <option value="Recibido" selected>Recibido</option>
                                                 <option value="En Proceso">En Proceso</option>
                                                 <option value="Solucionado">Solucionado</option>
                                             @elseif($prevenmaintenance->estado == 'En Proceso')
                                                 <option value="Activo">Activo</option>
-                                                <option value="Recibido">Recibido</option>
                                                 <option value="En Proceso" selected>En Proceso</option>
                                                 <option value="Solucionado">Solucionado</option>
                                             @elseif($prevenmaintenance->estado == 'Solucionado')
                                                 <option value="Activo">Activo</option>
-                                                <option value="Recibido">Recibido</option>
                                                 <option value="En Proceso">En Proceso</option>
                                                 <option value="Solucionado" selected>Solucionado</option>
                                             @else
-                                                <option value="" selected>Selecciona Estado</option>
-                                                <option value="Recibido">Recibido</option>
-                                                <option value="En Proceso">En Proceso</option>
-                                                <option value="Solucionado">Solucionado</option>
+                                                <option value="" >Selecciona Estado</option>
+                                                <option value="Anulado" selected>Anulado</option>
                                             @endif
                                         </select>
 
